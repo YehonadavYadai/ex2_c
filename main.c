@@ -18,14 +18,16 @@ initbank(bank,50);
 
     while (!pressExit)
     { //while B
+    printf("Please choose a transaction type: \n");
        instrcutions();
-       printf("Please choose a transaction type: \n");
-       scanf("%c",&c);
+       
+       scanf(" %c",&c);
+        legalId=false;
         switch (c)
             { //switch B
 
             case 'O':
-                    initbankaccount(bank,50);
+            initbankaccount(bank,50);
 break;
             case 'B':
                 whatYourid(&legalId, &id);
@@ -36,6 +38,7 @@ break;
                 break;
 
             case 'D':
+           
                 whatYourid(&legalId, &id);
                 if (legalId)
                 {
@@ -68,7 +71,7 @@ break;
                 pressExit = true;
               break;
             default:
-                printf("There no action like this , try again ! \n");
+                printf("Invalid transaction type \n");
             } //switch B
 
     } //while B

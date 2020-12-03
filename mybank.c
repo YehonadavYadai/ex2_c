@@ -25,18 +25,25 @@ void instrcutions()
 void whatYourid(bool *flag, int *idAcccountPointer)
 {
     int idaccount;
-    printf("what is your idAccount account\n");
-    scanf(" %d", &idaccount);
+    printf("Please enter account number: \n");
+    
+    if(scanf("%d", &idaccount) == 0 ) {
+
+                printf(" Failed to read the account number \n");
+               return;
+
+            }
 
     if ((idaccount < 951)&(idaccount>900))
     {
         *flag = true;
-        *idAcccountPointer = idaccount;
+        *idAcccountPointer = idaccount -901;
     }
-    else
+    else{
         *idAcccountPointer = -1;
     *flag = false;
-    printf("this is not a legal idaccount try again\n");
+    printf( "This account is closed \n");
+    }
 }
 
 void initbankaccount(double bank[][2],int Size)
@@ -55,12 +62,17 @@ for (int i = 0; i < Size; i++)
     if(find)// if hes finds place.
     {
         double sum;
-        printf("how much you want to leafkid?\n");
-        scanf("%lf", &sum);
+        printf("Please enter amount for deposit:\n");
+        if(scanf(" %lf", &sum) == 0 ) {
+
+                printf(" Failed to read the amount \n");
+               return;
+
+            }
         bank[idNew][1] = 1.0;                         // i switched "open"
         bank[idNew][0] = sum;    
         idNew=901+idNew;                     //i put the monay into the accoount.
-        printf("Please enter amount for deposit: New account number is:  %d \n",idNew); // i printed the idAccount.
+        printf(" New account number is:  %d \n",idNew); // i printed the idAccount.
 
     }
      else
@@ -76,7 +88,7 @@ void printHowMuch(int idAccount,double bank[][2])
         if (bank[idAccount][1] == 1)
         { // i its open
 
-            printf("you got %lf shekels in your account\n", bank[idAccount][0]);
+            printf("The balance of account number: %d is: %.2lf\n",(idAccount+901) ,bank[idAccount][0]);
         }
             else
             {
@@ -91,26 +103,31 @@ void printHowMuch(int idAccount,double bank[][2])
         
         if (idAccount != -1)
         {
-            printf("put here the money you want to put\n");
-            scanf("%lf" ,&sum);
+            printf("Please enter amount for deposit\n");
+            if(scanf("%lf", &sum) == 0 ) {
+
+                printf(" Failed to read the amount \n");
+               return;
+
+            }
             bank[idAccount][0] += sum;
-            printf("your monay in the bank now is :%lf\n" ,bank[idAccount][0]);
+            printf("The balance of account number %d is: %.2lf\n" ,idAccount+901,bank[idAccount][0]);
         }
     }
 
     void takeMoney(int idAccount,double bank[][2])
     {
         double sum = 0;
-            printf("put here the money you want to poll\n");
+            printf(" Please enter the amount to withdraw\n");
             scanf("%lf" ,&sum);
             if (bank[idAccount][0] >= sum)
             {
             bank[idAccount][0] -= sum;
-            printf("your monay in the bank now is :%lf\n" ,bank[idAccount][0]);
+            printf("The new balance is: %.2lf\n" ,bank[idAccount][0]);
             }
             else
             {
-                printf("you dont have enoght monay in your account ,go to work\n");
+                printf("Cannot withdraw more than the balance\n");
             }
         
     }
@@ -132,9 +149,11 @@ void printHowMuch(int idAccount,double bank[][2])
     void interesRate(double bank[][2])
     {
         double intrest_rate;
-        printf("what is the rate?\n");
-        scanf("%lf", &intrest_rate);
-        
+        printf("Please enter interest rate: \n");
+       if (scanf("%lf", &intrest_rate)==0){
+        printf(" Failed to read the interest rate\n");
+        return;
+       }
         for (int i=0;i < 50;i++)
         {
             if (bank[i][1] == 1)
@@ -161,7 +180,7 @@ void printHowMuch(int idAccount,double bank[][2])
             {
                 if (bank[i][1] == 1.0)
                 { // it its open
-                    printf("account idAccount :%d sumMoney: %lf \n" , i,bank[i][0]);
+                    printf("The balance of account number %d is: %.2lf \n" , i+901,bank[i][0]);
                 }
             }
         }
