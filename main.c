@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "mybank.h"
+#include "mybank.c"
 #include <stdbool.h>
 
 
@@ -8,11 +8,11 @@ int main()
     char c;
     int id;
     bool legalId;
-    bool stop = false;
-    while (!stop)
+    bool pressExit =false;
+    while (!pressExit)
     { //while B
        instrcutions();
-       printf("what activity you want to do \n");
+       printf("Please choose a transaction type: \n");
        scanf("%c",&c);
         switch (c)
             { //switch B
@@ -57,10 +57,11 @@ int main()
 
             case 'E':
                 closell;
-                stop = false;
+                pressExit = true;
+              
 
             default:
-                printf("There no action like this , try again ! ");
+                printf("There no action like this , try again ! \n");
             } //switch B
 
     } //while B

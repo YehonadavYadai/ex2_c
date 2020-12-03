@@ -9,29 +9,30 @@ double bank[NUMACCOUNTS][FIELDS];
 
 void instrcutions()
 {
-    
-    printf("'B' to check howmuch\n");
-    printf("'D' to put money\n");
-    printf("'W' to take money\n");
-    printf("'C' to close account\n");
-    printf("'I' to rate all open accunts\n");
-    printf("'P' to print all open accounts\n");
-    printf("'E' to close all open accounts and end program\n");
+   
+    printf("O-Open Account\n");
+    printf("B-Balance Inquiry\n");
+    printf("D-Deposit\n");
+    printf("W-Withdrawal\n");
+    printf("C-Close Account\n");
+    printf("I-Interest\n");
+    printf("P-Print\n");
+    printf("E-Exit\n");
     
 }
 
-void whatYourid(bool *flag, int *idAccount)
+void whatYourid(bool *flag, int *idAcccountPointer)
 {
     int idaccount;
     printf("what is your idAccount account\n");
-    scanf("%d", &idaccount);
+    scanf(" %d", &idaccount);
     if ((idaccount - 900 < 50)&&(idaccount-900>-1))
     {
         *flag = true;
-        *idAccount = idaccount - 900;
+        *idAcccountPointer = idaccount - 900;
     }
     else
-        *idAccount = -1;
+        *idAcccountPointer = -1;
     *flag = false;
     printf("this is not a legal idaccount try again\n");
 }
@@ -47,7 +48,7 @@ int idNew;
         bank[NumOfAcounts][1] = 1.0;                         // i switched "open"
         bank[NumOfAcounts][0] = sum;    
         idNew=900+NumOfAcounts;                     //i put the monay into the accoount.
-        printf("this is the account idAccount: %d \n",idNew); // i printed the idAccount.
+        printf("Please enter amount for deposit: New account number is:  %d \n",idNew); // i printed the idAccount.
         NumOfAcounts++;
     }
         else
