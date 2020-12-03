@@ -1,12 +1,13 @@
 #include <stdio.h>
 #include <stdbool.h>
-#define FIELDS 2
-#define NUMACCOUNTS 50
 
 
- int NumOfAcounts = 0;
-double bank[NUMACCOUNTS][FIELDS];
-
+void initbank (double bank[][2],int size){
+    for (int i = 0; i < size; i++){
+        bank[i][0]=0;
+        bank[i][1]=0;
+    } 
+}
 void instrcutions()
 {
    
@@ -26,10 +27,11 @@ void whatYourid(bool *flag, int *idAcccountPointer)
     int idaccount;
     printf("what is your idAccount account\n");
     scanf(" %d", &idaccount);
-    if ((idaccount - 900 < 50)&&(idaccount-900>-1))
+
+    if ((idaccount < 951)&(idaccount>900))
     {
         *flag = true;
-        *idAcccountPointer = idaccount - 900;
+        *idAcccountPointer = idaccount;
     }
     else
         *idAcccountPointer = -1;
@@ -37,28 +39,39 @@ void whatYourid(bool *flag, int *idAcccountPointer)
     printf("this is not a legal idaccount try again\n");
 }
 
-void initbankaccount()
+void initbankaccount(double bank[][2],int Size)
 { // he will go here if in the main he put "o" and got a legal idAccount
-int idNew;
-    if(NumOfAcounts < 50)
+int idNew=-1;
+int find=0;
+for (int i = 0; i < Size; i++)
+{
+    if ((bank[i][1]==0)&(!find))
+    {// check if there is a spot.
+        idNew=i;
+        find=1;
+    }
+}
+
+    if(find)// if hes finds place.
     {
         double sum;
         printf("how much you want to leafkid?\n");
         scanf("%lf", &sum);
-        bank[NumOfAcounts][1] = 1.0;                         // i switched "open"
-        bank[NumOfAcounts][0] = sum;    
-        idNew=900+NumOfAcounts;                     //i put the monay into the accoount.
+        bank[idNew][1] = 1.0;                         // i switched "open"
+        bank[idNew][0] = sum;    
+        idNew=901+idNew;                     //i put the monay into the accoount.
         printf("Please enter amount for deposit: New account number is:  %d \n",idNew); // i printed the idAccount.
-        NumOfAcounts++;
+
     }
-        else
+     else
         {
             printf("we sorry the bank is full. /n");
         }
     
+
 }
 
-void printHowMuch(int idAccount)
+void printHowMuch(int idAccount,double bank[][2])
 {
         if (bank[idAccount][1] == 1)
         { // i its open
@@ -72,7 +85,7 @@ void printHowMuch(int idAccount)
         }
     
 
-    void putMoney(int idAccount)
+    void putMoney(int idAccount,double bank[][2])
     {
         double sum = 0;
         
@@ -85,7 +98,7 @@ void printHowMuch(int idAccount)
         }
     }
 
-    void takeMoney(int idAccount)
+    void takeMoney(int idAccount,double bank[][2])
     {
         double sum = 0;
             printf("put here the money you want to poll\n");
@@ -101,7 +114,7 @@ void printHowMuch(int idAccount)
             }
         
     }
-    void closeAccount(int idAccount)
+    void closeAccount(int idAccount,double bank[][2])
     {
     
         if (bank[idAccount][1] == 1.0)
@@ -116,7 +129,7 @@ void printHowMuch(int idAccount)
         
     }
 
-    void interesRate()
+    void interesRate(double bank[][2])
     {
         double intrest_rate;
         printf("what is the rate?\n");
@@ -141,7 +154,7 @@ void printHowMuch(int idAccount)
         }
     }
 
-        void printall()
+        void printall(double bank[][2])
         {
             int i;
             for (i = 0; i < 50; i++)
@@ -153,10 +166,10 @@ void printHowMuch(int idAccount)
             }
         }
 
-            void closell()
+            void closell(double bank[][2])
             {
                 for (int i = 0; i < 50; i++)
                 {
-                    closeAccount(i);
+                   bank[i][1]=1;
                 }
             }

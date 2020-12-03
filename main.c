@@ -1,14 +1,21 @@
 #include <stdio.h>
-#include "mybank.c"
+#include "mybank.h"
 #include <stdbool.h>
+#define FIELDS 2
+#define SizeofBank 50
+
 
 
 int main()
 {
+    
+double bank[SizeofBank][FIELDS]; //init
+initbank(bank,50);
     char c;
     int id;
     bool legalId;
     bool pressExit =false;
+
     while (!pressExit)
     { //while B
        instrcutions();
@@ -16,50 +23,50 @@ int main()
        scanf("%c",&c);
         switch (c)
             { //switch B
-            case 'O':
-                whatYourid(&legalId, &id);
-                if (legalId)
-                {
-                    initbankaccount(id);
-                }
 
+            case 'O':
+                    initbankaccount(bank,50);
+break;
             case 'B':
                 whatYourid(&legalId, &id);
                 if (legalId)
                 {
-                    printHowMuch(id);
+                    printHowMuch(id,bank);
                 }
+                break;
 
             case 'D':
                 whatYourid(&legalId, &id);
                 if (legalId)
                 {
-                    putMoney(id);
+                    putMoney(id,bank);
                 }
+                break;
             case 'W':
                 whatYourid(&legalId, &id);
                 if (legalId)
                 {
-                    takeMoney(id);
+                    takeMoney(id,bank);
                 }
+                break;
             case 'C':
                 whatYourid(&legalId, &id);
                 if (legalId)
                 {
-                    closeAccount(id);
+                    closeAccount(id,bank);
                 }
+                break;
             case 'I':
-                interesRate();
-
+                interesRate(bank);
+break;
             case 'P':
-            printall();
+            printall(bank);
         
-
+break;
             case 'E':
-                closell;
+                closell(bank);
                 pressExit = true;
-              
-
+              break;
             default:
                 printf("There no action like this , try again ! \n");
             } //switch B
